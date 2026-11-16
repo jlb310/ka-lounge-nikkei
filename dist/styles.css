@@ -774,6 +774,93 @@ a {
   background: linear-gradient(90deg, var(--aji), var(--shu));
 }
 
+/* ---------- Asistente ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.assistant {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 3.5rem) var(--gutter) 0;
+  display: grid;
+  gap: 0.9rem;
+}
+.assistant__head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.assistant .hero__eyebrow {
+  color: var(--shu);
+}
+.assistant h2 {
+  font-size: clamp(1.7rem, 5.5vw, 2.2rem);
+}
+.assistant__lede {
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+.demo-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--aji);
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.assistant__form {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  max-width: 44rem;
+}
+.assistant__form input {
+  flex: 1 1 16rem;
+  min-height: 3rem;
+  padding: 0.7rem 0.85rem;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font: 400 1rem var(--sans);
+}
+.assistant__form input:focus-visible {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(227, 163, 58, 0.45);
+}
+.assistant__form .btn[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.assistant__answer {
+  max-width: 44rem;
+  padding: 1rem 1.2rem;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--matcha);
+  border-radius: var(--radius);
+}
+.assistant__answer[hidden] {
+  display: none;
+}
+.assistant__answer.is-fallback {
+  border-left-color: var(--aji);
+}
+
 /* ---------- Contacto ---------- */
 .contact {
   max-width: 68rem;
@@ -981,3 +1068,80 @@ a {
     font-size: 3rem;
   }
 }
+
+/* ==========================================================================
+   Ajustes de look & feel (SpaceHost): portada con foto, fotos por categoría
+   y tarjetas más limpias. Solo estilo: no cambia datos ni comportamiento.
+   ========================================================================== */
+.hero {
+  min-height: min(88svh, 52rem);
+  display: grid;
+  align-items: end;
+}
+.hero__foto {
+  position: absolute;
+  inset: 0;
+}
+.hero__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: ka-acerca 24s ease-out both;
+}
+.hero__foto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(20, 17, 15, 0.9) 0%, rgba(20, 17, 15, 0.55) 55%, rgba(20, 17, 15, 0.25) 100%),
+    linear-gradient(180deg, rgba(20, 17, 15, 0.4) 0%, transparent 35%, rgba(20, 17, 15, 0.92) 100%);
+}
+@keyframes ka-acerca {
+  from { transform: scale(1.1); }
+}
+.hero::before { z-index: 1; }
+.hero__inner { z-index: 2; width: 100%; }
+.enso { opacity: 0.7; }
+.hero__title { font-size: clamp(4rem, 17vw, 9rem); }
+.hero__lede { color: rgba(247, 241, 230, 0.9); }
+
+/* Barra de categorías: más aire y estado activo claro */
+.chip { transition: background-color 0.2s ease, color 0.2s ease; }
+
+/* Cabecera de categoría con foto */
+.category__foto {
+  margin: 0 0 1.4rem;
+  border-radius: calc(var(--radius) + 4px);
+  overflow: hidden;
+  aspect-ratio: 3 / 1;
+  background: var(--ink-2);
+}
+.category__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1.2s ease;
+}
+.category:hover .category__foto img { transform: scale(1.03); }
+@media (max-width: 40rem) {
+  .category__foto { aspect-ratio: 16 / 9; margin-inline: calc(var(--gutter) * -1); border-radius: 0; }
+}
+.category__head { border-bottom-width: 1px; }
+.category__title { font-size: clamp(1.9rem, 6vw, 2.8rem); }
+
+/* Tarjetas: sombra suave y elevación al pasar */
+.card {
+  border-color: rgba(214, 200, 177, 0.8);
+  box-shadow: 0 1px 2px rgba(20, 17, 15, 0.04), 0 18px 40px -30px rgba(20, 17, 15, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1px 2px rgba(20, 17, 15, 0.05), 0 26px 50px -30px rgba(20, 17, 15, 0.6);
+  }
+}
+.card--drink { box-shadow: none; }
+.card__title { font-size: 1.3rem; }

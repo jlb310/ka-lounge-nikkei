@@ -19,6 +19,20 @@ const FILTERS = [
   { id: 'vegetariano', label: 'Vegetariano', requires: 'vegetarian' },
 ];
 
+/**
+ * Foto de referencia (Unsplash) para la cabecera de cada categoría.
+ * @type {Record<string, string>}
+ */
+const CATEGORY_PHOTOS = {
+  entradas: '1649257171206-37625b1f3b2f',
+  ceviches: '1731570225640-7ddad4231679',
+  rolls: '1611762687807-7cdd09aef422',
+  nigiris: '1712725214706-e564b8dd1bbe',
+  calientes: '1626232441076-a2a5ada2256a',
+  postres: '1635355347994-b79177b77e5c',
+  cocteles: '1632995561510-38616ed64ff6',
+};
+
 const state = {
   /** @type {Set<string>} */
   filters: new Set(),
@@ -144,8 +158,10 @@ function renderCategory(category) {
         )
         .join('')
     : '<p class="empty">Ningún ítem de esta sección calza con los filtros elegidos.</p>';
+  const foto = CATEGORY_PHOTOS[category.id];
   return `
     <section class="category category--${category.kind}" id="${category.id}" aria-labelledby="h-${category.id}" data-category>
+      ${foto ? `<figure class="category__foto" aria-hidden="true"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-${foto}?w=1400&h=560&q=70&auto=format&fit=crop" /></figure>` : ''}
       <div class="category__head">
         <span class="category__kanji" aria-hidden="true" lang="ja">${category.kanji}</span>
         <div>

@@ -27,6 +27,12 @@
     </p>
 
     <header class="hero">
+      <div class="hero__foto" aria-hidden="true">
+        <img
+          src="https://images.unsplash.com/photo-1730302737876-e60de5c5e86c?w=1800&q=72&auto=format&fit=crop"
+          srcset="https://images.unsplash.com/photo-1730302737876-e60de5c5e86c?w=900&q=70&auto=format&fit=crop 900w, https://images.unsplash.com/photo-1730302737876-e60de5c5e86c?w=1800&q=72&auto=format&fit=crop 1800w"
+          sizes="100vw" alt="" fetchpriority="high" />
+      </div>
       <div class="hero__inner">
         <svg class="enso" viewBox="0 0 200 200" aria-hidden="true">
           <path
@@ -88,6 +94,29 @@
       <div id="menu-sections">
         <noscript><p class="empty">Activa JavaScript para ver la carta interactiva.</p></noscript>
       </div>
+
+      <section class="assistant" id="asistente" aria-labelledby="assistant-title">
+        <div class="assistant__head">
+          <p class="hero__eyebrow">Asistente de la carta</p>
+          <span class="demo-badge" id="assistant-mode">Modo demo</span>
+        </div>
+        <h2 id="assistant-title">Pregunta sobre un plato</h2>
+        <p class="assistant__lede">
+          Responde solo con la información de esta carta: ingredientes, alérgenos y disponibilidad. Si no lo sabe, te
+          derivará al personal del local.
+        </p>
+        <form id="assistant-form" class="assistant__form" novalidate>
+          <label class="visually-hidden" for="assistant-question">Tu pregunta</label>
+          <input id="assistant-question" name="question" type="text" required minlength="3" maxlength="280"
+            autocomplete="off" placeholder="Ej.: ¿El acevichado roll tiene gluten?" />
+          <button class="btn btn--primary" id="assistant-ask" type="submit">Preguntar</button>
+        </form>
+        <div id="assistant-answer" class="assistant__answer" role="status" aria-live="polite" hidden></div>
+        <p class="disclaimer">
+          Respuestas automáticas y referenciales para esta demo. Ante alergias severas, confírmalas siempre con el
+          personal del local.
+        </p>
+      </section>
 
       <section class="contact" id="contacto" aria-labelledby="contact-title">
         <div class="contact__info">
@@ -151,6 +180,10 @@
       </p>
       <p class="footer__credit">
         <a href="https://spacehost.cl" target="_blank" rel="noopener">Prototipo de SpaceHost</a> · <span id="year">2026</span>
+      </p>
+      <p class="footer__note">
+        Fotos de referencia en Unsplash: Kobby Mendez, Filipp Romanovski, Martin Baron, Jennifer Latuperisa-Andresen,
+        susu jang, J. Balla Photography, blackieshoot y Kike Salazar N.
       </p>
     </footer>
   </body>
