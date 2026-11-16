@@ -89,6 +89,29 @@
         <noscript><p class="empty">Activa JavaScript para ver la carta interactiva.</p></noscript>
       </div>
 
+      <section class="assistant" id="asistente" aria-labelledby="assistant-title">
+        <div class="assistant__head">
+          <p class="hero__eyebrow">Asistente de la carta</p>
+          <span class="demo-badge" id="assistant-mode">Modo demo</span>
+        </div>
+        <h2 id="assistant-title">Pregunta sobre un plato</h2>
+        <p class="assistant__lede">
+          Responde solo con la información de esta carta: ingredientes, alérgenos y disponibilidad. Si no lo sabe, te
+          derivará al personal del local.
+        </p>
+        <form id="assistant-form" class="assistant__form" novalidate>
+          <label class="visually-hidden" for="assistant-question">Tu pregunta</label>
+          <input id="assistant-question" name="question" type="text" required minlength="3" maxlength="280"
+            autocomplete="off" placeholder="Ej.: ¿El acevichado roll tiene gluten?" />
+          <button class="btn btn--primary" id="assistant-ask" type="submit">Preguntar</button>
+        </form>
+        <div id="assistant-answer" class="assistant__answer" role="status" aria-live="polite" hidden></div>
+        <p class="disclaimer">
+          Respuestas automáticas y referenciales para esta demo. Ante alergias severas, confírmalas siempre con el
+          personal del local.
+        </p>
+      </section>
+
       <section class="contact" id="contacto" aria-labelledby="contact-title">
         <div class="contact__info">
           <p class="hero__eyebrow">Consultas</p>

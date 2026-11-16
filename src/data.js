@@ -353,6 +353,6 @@ export const MENU = [
 /** Número público de referencia. El canal aún no está confirmado con el local. */
 export const PHONE = {
   display: '+56 9 9396 9210',
-  href: '#',
+  href: 'tel:+56993969210',
   label: 'Canal por confirmar',
 };

@@ -274,10 +274,63 @@ function setupContactForm() {
   });
 }
 
+/** Endpoint propio para preguntas de la carta. */
+const ASSISTANT_ENDPOINT = '/api/claude';
+
+/**
+ * Asistente de la carta: envía solo la pregunta al endpoint del prototipo.
+ * Se muestra la respuesta con textContent (nunca como HTML).
+ */
+function setupAssistant() {
+  const form = $('#assistant-form', HTMLFormElement);
+  const input = $('#assistant-question', HTMLInputElement);
+  const button = $('#assistant-ask', HTMLButtonElement);
+  const answer = $('#assistant-answer', HTMLElement);
+  const badge = $('#assistant-mode', HTMLElement);
+
+  /** @param {string} text @param {boolean} fallback */
+  const show = (text, fallback) => {
+    answer.textContent = text;
+    answer.classList.toggle('is-fallback', fallback);
+    answer.hidden = false;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const question = input.value.trim();
+    if (question.length < 3 || question.length > 280) {
+      input.setCustomValidity('Escribe una pregunta de entre 3 y 280 caracteres.');
+      input.reportValidity();
+      return;
+    }
+    input.setCustomValidity('');
+    button.disabled = true;
+    show('Buscando en la carta…', false);
+    try {
+      const response = await fetch(ASSISTANT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question }),
+      });
+      const data = await response.json();
+      if (!response.ok || typeof data.answer !== 'string') throw new Error(data.error ?? 'Respuesta inválida');
+      badge.textContent = data.mode === 'claude' ? 'Modo demo · Claude' : 'Modo demo · simulado';
+      show(data.answer, Boolean(data.fallback));
+    } catch {
+      show('El asistente no está disponible en esta vista previa. Consulta directamente con el personal del local.', true);
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  input.addEventListener('input', () => input.setCustomValidity(''));
+}
+
 renderNav();
 renderFilters();
 renderMenu();
 renderAvailabilitySummary();
 renderPhone();
 setupContactForm();
+setupAssistant();
 $('#year', HTMLElement).textContent = String(new Date().getFullYear());
