@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Ka Lounge Nikkei · Prototipo de carta digital</title>
+    <meta
+      name="description"
+      content="Prototipo demostrativo de carta digital para Ka Lounge Nikkei: categorías, ingredientes, alérgenos, cócteles explicados y disponibilidad."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#14110f" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="src/main.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#carta">Saltar a la carta</a>
+
+    <p class="demo-banner" role="note">
+      <strong>Demo de propuesta.</strong> Este no es el sitio oficial de Ka Lounge Nikkei; los contenidos son de ejemplo.
+    </p>
+
+    <header class="hero">
+      <div class="hero__inner">
+        <svg class="enso" viewBox="0 0 200 200" aria-hidden="true">
+          <path
+            d="M100 18c47 0 82 34 82 80 0 47-36 84-84 84-45 0-80-35-80-80 0-36 21-64 52-76"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="9"
+            stroke-linecap="round"
+          />
+        </svg>
+        <p class="hero__eyebrow">Cocina Nikkei · Lounge</p>
+        <h1 class="hero__title">Ka <span>Lounge</span></h1>
+        <p class="hero__lede">
+          Perú y Japón en la misma mesa. Revisa la carta con ingredientes, alérgenos y disponibilidad a la vista, sin
+          abrir cada plato.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#carta">Ver la carta</a>
+          <a class="btn btn--ghost" href="#cocteles">Cócteles explicados</a>
+        </div>
+        <a class="phone-pill" data-phone href="tel:+56993969210">
+          <span class="phone-pill__label" data-phone-label>Canal por confirmar</span>
+          <span class="phone-pill__number" data-phone-number>+56 9 9396 9210</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="carta">
+      <div class="toolbar" role="region" aria-label="Navegación y filtros de la carta">
+        <nav class="toolbar__nav" id="category-nav" aria-label="Categorías de la carta"></nav>
+      </div>
+
+      <section class="intro-panel" aria-labelledby="intro-title">
+        <div class="intro-panel__text">
+          <h2 id="intro-title">La carta</h2>
+          <p>
+            Filtra según tu dieta. Cada tarjeta muestra los ingredientes, los alérgenos principales y si el plato está
+            disponible hoy.
+          </p>
+        </div>
+        <div class="availability-box">
+          <p class="label">Disponibilidad de hoy <span class="muted">(referencial)</span></p>
+          <ul id="availability-summary" class="availability-box__list" role="list"></ul>
+        </div>
+        <div class="filters-wrap">
+          <p class="label" id="filters-label">Filtrar por dieta</p>
+          <div id="filters" class="filters" role="group" aria-labelledby="filters-label"></div>
+          <p class="filters-status">
+            <span id="filter-status" aria-live="polite"></span>
+            <button type="button" id="filter-reset" class="link-btn" hidden>Quitar filtros</button>
+          </p>
+        </div>
+        <p class="disclaimer">
+          Alérgenos e ingredientes son referenciales para esta demo. Ante alergias severas, confírmalos siempre con el
+          personal del local.
+        </p>
+      </section>
+
+      <div id="menu-sections">
+        <noscript><p class="empty">Activa JavaScript para ver la carta interactiva.</p></noscript>
+      </div>
+
+      <section class="contact" id="contacto" aria-labelledby="contact-title">
+        <div class="contact__info">
+          <p class="hero__eyebrow">Consultas</p>
+          <h2 id="contact-title">¿Dudas sobre un plato?</h2>
+          <p>
+            Pregunta por alérgenos, ingredientes o disponibilidad. Los canales oficiales del local aún no están
+            confirmados para esta demo.
+          </p>
+          <a class="phone-card" data-phone href="tel:+56993969210">
+            <span class="phone-card__label" data-phone-label>Canal por confirmar</span>
+            <span class="phone-card__number" data-phone-number>+56 9 9396 9210</span>
+            <span class="phone-card__hint">Número público de referencia</span>
+          </a>
+          <dl class="facts">
+            <div><dt>Horario</dt><dd>Por confirmar</dd></div>
+            <div><dt>Dirección</dt><dd>Por confirmar</dd></div>
+          </dl>
+        </div>
+
+        <div class="contact__form">
+          <form id="contact-form" novalidate>
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="given-name" required minlength="2" />
+            </div>
+            <div class="field">
+              <label for="motivo">Motivo</label>
+              <select id="motivo" name="motivo" required>
+                <option value="">Elige una opción</option>
+                <option>Alérgenos o restricciones</option>
+                <option>Ingredientes de un plato</option>
+                <option>Disponibilidad de la carta</option>
+                <option>Consulta general</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="4" required minlength="10"
+                placeholder="Ej.: ¿El ceviche Nikkei se puede preparar sin gluten?"></textarea>
+            </div>
+            <p class="form-note">
+              Prototipo: el formulario no envía datos. Solo verás una confirmación en esta pantalla.
+            </p>
+            <button class="btn btn--primary btn--block" type="submit">Preparar consulta</button>
+          </form>
+
+          <div id="contact-result" class="result" tabindex="-1" role="status" hidden>
+            <p class="result__title">Consulta lista (no enviada)</p>
+            <p id="contact-result-text"></p>
+            <button type="button" id="contact-again" class="btn btn--ghost">Escribir otra</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__brand">Ka Lounge <span lang="ja" aria-hidden="true">日系</span></p>
+      <p class="footer__note">
+        Demo de propuesta sin relación oficial con el local. Marcas y nombres pertenecen a sus dueños.
+      </p>
+      <p class="footer__credit">
+        <a href="https://spacehost.cl" target="_blank" rel="noopener">Prototipo de SpaceHost</a> · <span id="year">2026</span>
+      </p>
+    </footer>
+  </body>
+</html>

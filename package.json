@@ -1,0 +1,16 @@
+{
+  "name": "ka-lounge-nikkei-prototipo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prototipo demostrativo de carta digital para Ka Lounge Nikkei (SpaceHost).",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p jsconfig.json",
+    "check": "node scripts/check.mjs",
+    "build": "npm run typecheck && npm run check && node scripts/build.mjs",
+    "preview": "npx --yes serve dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
+}
